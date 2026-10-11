@@ -1,0 +1,284 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page-wrap {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  background-color: #dbe9f7;
+  padding: 24px
+}
+
+.main-content {
+  background-color: #2213cf00;
+  padding: 24px;
+}
+.user-info {
+  display: flex; /* 开启Flex布局，让头像和名字横向并排 */
+  align-items: center; /* 让头像和名字在垂直方向上自动居中对齐 */
+  gap: 12px; /* 头像和名字之间自动留出12px的间距，不用手动调边距 */
+  margin-bottom: 40px; /* 给整个模块下面留40px的距离，和后面的导航菜单分开 */
+}
+
+/* 选中头像容器，做圆形效果 */
+.avatar {
+  width: 56px; /* 头像宽度设置为56像素 */
+  height: 56px; /* 头像高度设置为56像素，宽高相等就是正方形 */
+  border-radius: 50%; /* 给正方形设置50%圆角，直接变成正圆形 */
+  background-image: url('./img/文武.jpg');
+  background-size: cover;
+  background-position: center;}
+
+.username {
+  font-size: 18px; /* 文字大小设置为18号 */
+  font-weight: 600; /* 文字设置成半粗体，更醒目 */
+  color: #1e293b; /* 文字用深灰色，比纯黑色更柔和 */
+}
+.nav-item {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.nav-item a {
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 12px;
+  background-color: #92c6e9;
+  color: #0369a1;
+  text-decoration: none;
+  font-size: 20px;
+  transition: all 0.2s ease;
+  
+}
+
+.nav-item a:hover {
+  transform: scale(1.05);
+  background-color: #addaef;
+  color: white;
+}
+/* 选中所有内容页面的公共容器 */
+.content-page {
+  /* 给页面标题设置字号和颜色 */
+  h2 {
+    font-size: 40px;
+    color: #1e293b;
+    margin-bottom: 20px;
+  }
+  /* 给页面正文设置行高和颜色，读起来更舒服 */
+  p {
+    font-size: 30px;
+    line-height: 1.8;
+    color: #475569;
+  }
+}
+
+/* 核心切换逻辑：当URL里的锚点匹配到#page-home时，自动选中这个页面 */
+#page-home:target {
+  /* 给选中的页面加一点淡蓝色背景高亮，一眼就能看到切换成功 */
+  background-color: #f0f9ff;
+  /* 给页面加内边距，内容不会贴边 */
+  padding: 30px;
+  /* 给页面加圆角，和左侧按钮风格统一 */
+  border-radius: 16px;
+}
+
+.wrap {
+  display: flex; /* 开启弹性布局，margin-left:auto才能正常工作 */
+}
+
+.zhushi1 {
+  color: rgb(161, 158, 158);
+  font-weight: bold;
+  font-size: 18px;
+  /* 直接给这个容器设置100%可用宽度，完全撑满右侧内容区 */
+  width: 50%;
+  /* 文字强制靠右，没有任何前提条件 */
+  text-align: right;
+  /* 给它加一点上边距，和图片拉开一点空隙，不会贴在一起 */
+  margin-top: 10px;
+}
+
+/* 所有页面默认全部隐藏 */
+.content-page {
+  display: none;
+}
+
+/* 只要没有任何锚点，首页就显示 */
+body:not(:has(.content-page:target)) #page-home {
+  display: block;
+}
+
+/* 被锚点选中的页面直接显示，优先级自动覆盖上面的隐藏规则 */
+.content-page:target {
+  display: block;
+}
+
+#pinglunqu {
+  /* 只给评论区设置你想要的背景色，比如你可以换成淡粉、浅蓝、米黄任意颜色 */
+  background-color: #fff7e8;
+  /* 让背景色铺满整个右侧内容区，不会只包裹内容 */
+
+
+}
+ 
+hr {
+  margin-top: 18px;
+}
+
+/* 总评论数小盒子样式，自带你要的和分割线的距离 */
+.total-comment-count {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.total-comment-count h3 {
+  margin: 0;
+  color: #333;
+}
+
+/* 分割线适配，自动上下留空不挤内容 */
+hr {
+  border: none;
+  height: 1px;
+  background-color: #e6d5ba;
+  margin: 0 0 30px 0;
+}
+
+/* 评论列表大容器，统一控制全局间距 */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 单条评论盒子，横向布局自动对齐 */
+.comment-item {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0e6d6;
+  align-items: flex-start;
+}
+
+/* 小头像样式 */
+.user-avatar {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 评论内容区域，自动占满中间剩余宽度 */
+.comment-content {
+  flex: 1;
+}
+
+.username {
+  display: block;
+  font-weight: bold;
+  color: #d48806;
+  margin-bottom: 6px;
+}
+
+.comment-text {
+  margin: 0;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* 点赞按钮样式，已写好点击变色放大效果 */
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+  color: #666;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.like-icon {
+  filter: grayscale(100%);
+  transition: all 0.2s;
+}
+
+.like-btn input:checked + .like-icon {
+  filter: grayscale(0);
+  transform: scale(1.2);
+}
+
+/* CSS计数器自动实现点击点赞+1 */
+.like-btn:nth-of-type(1) { counter-reset: like 27; }
+.like-btn:nth-of-type(2) { counter-reset: like 18; }
+.like-btn:nth-of-type(3) { counter-reset: like 12; }
+.like-count::before {
+  content: counter(like);
+}
+.like-btn input:checked ~ .like-count {
+  counter-increment: like 1;
+}
+
+.new-comment-box {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e6d5ba;
+}
+
+.input-tip {
+  margin: 0 0 12px 0;
+  font-size: 17px;
+  color: #666;
+  font-weight: 500;
+}
+
+.comment-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px 15px;
+  border: 1px solid #e6d5ba;
+  border-radius: 8px;
+  background-color: #fff;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 1.5;
+  outline: none;
+  /* 禁止用户随意拖拽改变输入框大小，防止布局乱掉 */
+  resize: none;
+}
+
+/* 输入框点击聚焦时的高亮效果，和整体色调统一 */
+.comment-input:focus {
+  border-color: #d48806;
+  box-shadow: 0 0 0 2px rgba(212, 136, 6, 0.1);
+}
+
+.submit-btn {
+  margin-top: 15px;
+  padding: 8px 22px;
+  background-color: #d48806;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #b87705;
+}
